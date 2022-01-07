@@ -53,7 +53,6 @@
 
             nodeBefore.Next = node;
             node.Next = nodeAfter;
-
         }
 
         /// <summary>
