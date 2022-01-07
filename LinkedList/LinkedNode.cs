@@ -2,11 +2,13 @@
 {
     public class LinkedNode<T>
     {
-        public LinkedNode<T> next;
+        public LinkedNode<T> Next;
+
         public T Data;
-        public LinkedNode(T Data)
+
+        public LinkedNode(T data)
         {
-            this.Data = Data;
+            Data = data;
         }
     }
 }

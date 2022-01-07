@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.ExceptionServices;
 
 namespace LinkedList
 {
@@ -6,46 +7,80 @@ namespace LinkedList
     {
         static void Main(string[] args)
         {
-            Linked<string> list = new Linked<string>();
+            Console.WriteLine("----strings----");
 
-            list.AddFirst(new LinkedNode<string>("first entry (added first, as first)"));
-            list.AddFirst(new LinkedNode<string>("second entry (added second, as first)"));
-            list.AddLast(new LinkedNode<string>("third entry (added third, as last)"));
-            list.AddLast(new LinkedNode<string>("fourth entry (added fourth, as first)"));
-            list.AddFirst(new LinkedNode<string>("fifth entry (added fifth, as first)"));
-            list.AddLast(new LinkedNode<string>("sixth entry (added sixth, as last)"));
-            LinkedNode<string> newLastNode = new LinkedNode<string>("seventh entry, as new link node");
-            list.AddLast(newLastNode);
-            list.insertAfter(newLastNode, new LinkedNode<string>("inserted first after the last"));
-            //list.insertAfter(newLastNode, new LinkedNode<string>("inserted second after the last, but will appear right after the last"));
+            var stringList = new LinkedList<string>();
 
-            DisplayAllNodes(list);
+            var nodeOne = new LinkedNode<string>("Node One (I was added as the First Node)");
+            stringList.AddNodeFirst(nodeOne);
 
-            //Console.WriteLine("list2 items are being displayed");
-            //Linked<string> list2 = new Linked<string>();
+            var nodeTwo = new LinkedNode<string>("Node Two (I was added as the First Node so, Node One was bumped down");
+            stringList.AddNodeFirst(nodeTwo);
 
-            //list2.AddLast(new LinkedNode<string>("first item"));
-            //list2.AddLast(new LinkedNode<string>("second item"));
-            //LinkedNode<string> thirdItem = new LinkedNode<string>("third item");
-            //list2.AddLast(thirdItem);
-            //list2.AddLast(new LinkedNode<string>("fourth item"));
-            //list2.AddLast(new LinkedNode<string>("fifth item"));
+            var nodeThree = new LinkedNode<string>("Node Three (I was added as the Last Node so, Node One & Two are above me");
+            stringList.AddNodeLast(nodeThree);
 
-            //list2.removeLink(thirdItem);
+            var nodeFour = new LinkedNode<string>("Node Four (I was inserted after Node Two so, I'm below Node two)");
+            stringList.InsertNodeAfter(nodeTwo, nodeFour);
 
-            //DisplayAllNodes(list2);
+            var nodeFive = new LinkedNode<string>("Node Five (I was added as the First Node so, Node two was bumped down");
+            stringList.AddNodeFirst(nodeFive);
 
+            stringList.RemoveNode(nodeFour);
+
+            var nodeSix = new LinkedNode<string>("Node Six (Node Four was just removed. I was added as the Last Node so, Node Three is above me)");
+            stringList.AddNodeLast(nodeSix);
+
+            DisplayAllStringNodes(stringList);
+
+            Console.WriteLine("----ints----");
+
+            var intList = new LinkedList<int>();
+
+            var nodeSeven = new LinkedNode<int>(7);
+            intList.AddNodeFirst(nodeSeven);
+
+            var nodeEight = new LinkedNode<int>(8);
+            intList.AddNodeFirst(nodeEight);
+
+            var nodeNine = new LinkedNode<int>(9);
+            intList.AddNodeLast(nodeNine);
+
+            var nodeTen = new LinkedNode<int>(10);
+            intList.AddNodeLast(nodeTen);
+
+            var nodeEleven = new LinkedNode<int>(11);
+            intList.AddNodeFirst(nodeEleven);
+
+            intList.RemoveNode(nodeEight);
+
+            var nodeTwelve = new LinkedNode<int>(12);
+            intList.AddNodeLast(nodeTwelve);
+
+            DisplayAllIntNodes(intList);
 
             Console.ReadLine();
         }
 
-        private static void DisplayAllNodes(Linked<string> list)
+        private static void DisplayAllStringNodes(LinkedList<string> list)
         {
-            LinkedNode<string> cursor = list.Head;
+            var cursor = list.Head;
+
             while (cursor != null)
             {
                 Console.WriteLine(cursor.Data);
-                cursor = cursor.next;
+                cursor = cursor.Next;
+            }
+        }
+
+        private static void DisplayAllIntNodes(LinkedList<int> list)
+        {
+            var cursor = list.Head;
+
+            while (cursor != null)
+            {
+                Console.WriteLine(cursor.Data);
+                cursor = cursor.Next;
             }
         }
     }
